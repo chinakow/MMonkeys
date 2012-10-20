@@ -1,19 +1,13 @@
-
 /*
-Iterate through a string until the string is randomly generated. keep
-track of both the number of itterations and the time it took, bail it it
-runs for more than an hour. Print out each itteration.
-main
-	get string
-	setup timer
-	itterate through string
-		start with 1 char
-			create substring
-			Print iterations and stats
-		add 1 more on each success
-		if full string, exit
-
-*/
+ * main.c -- A test to see how long it really would take to randomly
+ * create even a simple string.
+ *
+ * Created by: Jon McLaughlin jon@jpmrc.com
+ *
+ * Created: October 20, 2012
+ *
+ * Since it is so simple, this application is public domain.
+ */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
