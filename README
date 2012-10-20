@@ -1,0 +1,23 @@
+The saying goes, "A million monkeys at typewrites will eventually write
+the complete works of Shakespeare." I wanted to see how long it would
+take. So I wrote this little application that would try to randomly
+generate a string. So far I can't even generate the string "Monkey" in
+fewer than 5 million attempts. So I suppose the say might be correct,
+but a lot of those monkeys are going to die trying too.
+
+The usefulness of this code is nearly 0 but it gave me a chance to use
+arc4random_uniform() which I always enjoy for some reason. As it stands
+now, the application will not find any punctuation aside from spaces so
+periods, commas, question marks, and exclamation points will cause the
+application to hit the 5 million attempt limit and fail.
+
+to compile:
+
+make
+
+to run:
+
+./monkeys.out
+
+I have already spelled monkeys, 'mokeys' twice so I expect there are
+plenty of of spelling mistakes as well.
