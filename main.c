@@ -21,7 +21,7 @@ main
 #include <time.h>
 #include <unistd.h>
 
-#define STRING "Cow"
+#define STRING "Monkey"
 
 char *randomStrOfLen(int num)
 {
