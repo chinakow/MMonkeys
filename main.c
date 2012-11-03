@@ -54,7 +54,6 @@ int iterateAndCompare(char *source, int numChars)
 	snprintf(target, numChars + 1, "%s", source);
 	attempt = randomStrOfLen(numChars);
 	while (strncmp(target, attempt, numChars) != 0) {
-		//printResults(target, attempt, count);
 		free(attempt);
 		attempt = randomStrOfLen(numChars);
 		count++;
@@ -66,7 +65,6 @@ int iterateAndCompare(char *source, int numChars)
 		}
 	}
 	printResults(target, attempt, count);
-	fprintf(stderr, "%20s:%4d: found \"%s\" after %ld iterations\n", __FILE__, __LINE__, attempt, count);
 	free(target);
 	free(attempt);
 	return count;
