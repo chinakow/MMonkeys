@@ -32,6 +32,7 @@ char *randomStrOfLen(int num)
 			}
 		}
 	}
+	attempt[num] = '\0';
 
 	return attempt;
 }
