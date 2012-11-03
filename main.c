@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 #define STRING "Monkey"
+#define MAX_COUNT_REACHED -2
 
 char *randomStrOfLen(int num)
 {
@@ -52,15 +53,15 @@ int iterateAndCompare(char *source, int numChars)
 	snprintf(target, numChars + 1, "%s", source);
 	attempt = randomStrOfLen(numChars);
 	while (strncmp(target, attempt, numChars) != 0) {
-		printResults(target, attempt, count);
+		//printResults(target, attempt, count);
 		free(attempt);
 		attempt = randomStrOfLen(numChars);
 		count++;
-		if(count > 5000000) {
+		if(count > 50000000) {
 			free(target);
 			free(attempt);
-			fprintf(stderr, "%20s:%4d: Bailing after 5M attempts\n", __FILE__, __LINE__);
-			return -1;
+			fprintf(stderr, "%20s:%4d: Bailing after 50M attempts\n", __FILE__, __LINE__);
+			return MAX_COUNT_REACHED;
 		}
 	}
 	printResults(target, attempt, count);
@@ -106,17 +107,21 @@ int main(int argc, char *argv[])
 	rv = iterateAndCompare(string, curStrLen);
 	end = time(NULL);
 	while ((end - start) < 30) {
+		printInterval(start, end, string, curStrLen);
 		if (rv == -1) {
 			fprintf(stderr, "%20s:%4d: did not find string\n", __FILE__, __LINE__);
 			return -1;
 		}
-		printInterval(start, end, string, curStrLen);
 		if (curStrLen < maxStrLen) {
 			curStrLen++;
-			sleep(10);
+			sleep(2);
 			start = end = time(NULL);
 			rv = iterateAndCompare(string, curStrLen);
 			end = time(NULL);
+			if (rv == MAX_COUNT_REACHED) {
+				fprintf(stderr, "%20s:%4d: Maximum count reached without success after %ld seconds\n", __FILE__, __LINE__, end - start);
+				return -1;
+			}
 		} else {
 			fprintf(stderr, "%20s:%4d: End of test.\n", __FILE__, __LINE__);
 			break;
