@@ -57,10 +57,10 @@ int iterateAndCompare(char *source, int numChars)
 		free(attempt);
 		attempt = randomStrOfLen(numChars);
 		count++;
-		if(count > 50000000) {
+		if(count > 500000000) {
 			free(target);
 			free(attempt);
-			fprintf(stderr, "%20s:%4d: Bailing after 50M attempts\n", __FILE__, __LINE__);
+			fprintf(stderr, "%20s:%4d: Bailing after 500M attempts\n", __FILE__, __LINE__);
 			return MAX_COUNT_REACHED;
 		}
 	}
