@@ -83,7 +83,11 @@ void printInterval(time_t start, time_t end, char *string, int maxStrLen)
 
 	subStr = malloc(maxStrLen + 1);
 	snprintf(subStr, maxStrLen + 1, "%s", string);
+#ifdef __x86_64__
 	fprintf(stderr, "%20s:%4d: \"%s\" found after %ld seconds\n", __FILE__, __LINE__, subStr, elapsed);
+#else
+	fprintf(stderr, "%20s:%4d: \"%s\" found after %d seconds\n", __FILE__, __LINE__, subStr, elapsed);
+#endif
 	free(subStr);
 	subStr = NULL;
 	return;
@@ -118,7 +122,12 @@ int main(int argc, char *argv[])
 			rv = iterateAndCompare(string, curStrLen);
 			end = time(NULL);
 			if (rv == MAX_COUNT_REACHED) {
+#ifdef __x86_64__
 				fprintf(stderr, "%20s:%4d: Maximum count reached without success after %ld seconds\n", __FILE__, __LINE__, end - start);
+#else
+				fprintf(stderr, "%20s:%4d: Maximum count reached without success after %d seconds\n", __FILE__, __LINE__, end - start);
+#endif
+
 				return -1;
 			}
 		} else {
